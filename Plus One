@@ -1,0 +1,18 @@
+#Version Alternativa al problema de Plus One Leet code, donde se toma el carrier
+class Solution:
+    def plusOne(self, digits: List[int]) -> List[int]:
+        # buscar solución recursiva; funcion auxiliar
+        def auxi(digits):       
+            if digits:
+                if digits[-1] == 9:
+                    digits[-1] = 0
+                    auxi(digits[:-1])
+                digits[-1] += 1
+            if not digits and self.flag:
+                return digits.insert(0,1)
+            return digits
+        
+        self.flag = False
+        if digits[0] == 9:
+            self.flag = True
+        return auxi(digits)
