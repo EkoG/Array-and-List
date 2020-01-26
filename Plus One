@@ -1,0 +1,14 @@
+def plusOne(self, digits: List[int]) -> List[int]:
+        carrier = 1
+        i = len(digits) - 1
+        while not i < 0:
+            if digits[i] == 9:
+                digits[i] = 0 
+            else:
+                digits[i] += carrier
+                carrier = 0
+                break
+            i -= 1
+        if carrier == 1:
+            digits = [1] + digits
+        return digits
