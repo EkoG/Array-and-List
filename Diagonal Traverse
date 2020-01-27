@@ -1,0 +1,16 @@
+class Solution:
+    def findDiagonalOrder(self, matrix: List[List[int]]) -> List[int]:
+        if not matrix: return []
+        ans =[]
+        rows = len(matrix)
+        colums = len(matrix[0])
+        for i in range(rows + colums -1):
+            diagonal = []
+            diagonalRow, diagonalColum = 0 if i < colums else i - colums + 1, i if i < colums else colums -1
+            while diagonalColum >= 0 and diagonalRow < rows:
+                diagonal.append(matrix[diagonalRow][diagonalColum])
+                diagonalRow += 1
+                diagonalColum -= 1
+            if i % 2 == 0: diagonal = diagonal[::-1]
+            ans += diagonal
+        return ans
