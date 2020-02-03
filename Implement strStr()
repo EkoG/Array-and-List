@@ -1,0 +1,15 @@
+def strStr(haystack, needle):
+    if not needle: return 0
+    hs = len(haystack)
+    nd = len(needle)
+    for i in range(hs - nd + 1):
+        uu = haystack[i: nd + i]
+        if needle == uu:
+            return i
+    return -1
+u = strStr("bb", 'aa')
+print(u)
+
+#Solución alternativa
+return haystack.find(needle)
+#cuando needle = empty; se retorna 0 porque en lenguajes como c, los strings terminan en NULL, por lo que si needle = NULL retornará cero
