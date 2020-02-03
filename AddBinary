@@ -1,35 +1,14 @@
-def addBinary(a,b):
-    def binary(a, b, carrier):
-        if carrier and not b and not a:
-            c = '1'
-            carrier = False
-        if carrier and not b:
-            c = binary(a, '1', carrier=False)
-        if carrier and not a:
-            c = binary('1', b, carrier=False)
-        if carrier and b and a:
+class Solution:
+     def addBinary(self, a: str, b: str) -> str:
+            if not a: return b
+            if not b: return a
             if a[-1] != b[-1]:
-                c = binary(a[:-1], b[:-1], carrier=True)
-                c += '0'
+                return self.addBinary(a[:-1], b[:-1]) + '1'
             elif a[-1] == '0' and b[-1] == '0':
-                c = binary(a[:-1], b[:-1], carrier=False)
-                c += '1'
+                return self.addBinary(a[:-1], b[:-1]) + '0'
             else:
-                c = binary(a[:-1], b[:-1], carrier=True)
-                c += '1'
-        elif not carrier and b and a:
-            if a[-1] != b[-1]:
-                c = binary(a[:-1], b[:-1], carrier=False)
-                c += '1'
-            elif a[-1] == '0' and b[-1] == '0':
-                c = binary(a[:-1], b[:-1], carrier=False)
-                c += '0'
-            else:
-                c = binary(a[:-1], b[:-1], carrier=True)
-                c += '0'
-        return c
-
-    if not b and not a: return
-    c = binary(a, b, carrier=False)
-    return c
-addBinary("1010","1011")
+                return self.addBinary('1', self.addBinary(a[:-1], b[:-1])) + '0' 
+    #Cuando b y a son iguales a 1, se devuelve de manera anidada la funcion (1, funcion(siguiente STRING, siguiente String)) + 0, 
+    #guardando el carrier hasta que haya una suma diferente de 1 + 1
+            #nota:     cuando el carrier llega null, null --> (1,null) --> regresa '10'; esto lo podría sumar con lo demás o ser 
+            #la primera parte de la suma y podría sumar más carriers
