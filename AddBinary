@@ -1,0 +1,35 @@
+def addBinary(a,b):
+    def binary(a, b, carrier):
+        if carrier and not b and not a:
+            c = '1'
+            carrier = False
+        if carrier and not b:
+            c = binary(a, '1', carrier=False)
+        if carrier and not a:
+            c = binary('1', b, carrier=False)
+        if carrier and b and a:
+            if a[-1] != b[-1]:
+                c = binary(a[:-1], b[:-1], carrier=True)
+                c += '0'
+            elif a[-1] == '0' and b[-1] == '0':
+                c = binary(a[:-1], b[:-1], carrier=False)
+                c += '1'
+            else:
+                c = binary(a[:-1], b[:-1], carrier=True)
+                c += '1'
+        elif not carrier and b and a:
+            if a[-1] != b[-1]:
+                c = binary(a[:-1], b[:-1], carrier=False)
+                c += '1'
+            elif a[-1] == '0' and b[-1] == '0':
+                c = binary(a[:-1], b[:-1], carrier=False)
+                c += '0'
+            else:
+                c = binary(a[:-1], b[:-1], carrier=True)
+                c += '0'
+        return c
+
+    if not b and not a: return
+    c = binary(a, b, carrier=False)
+    return c
+addBinary("1010","1011")
