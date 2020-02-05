@@ -1,0 +1,26 @@
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        def common_prefix(min_string, index, len_min):
+            if index == 0: return [min_string]
+            d = []
+            for i in range(index):
+                d.append(min_string[i : i + len_min - index])
+            return d     
+        if not strs : return ''
+        min_string = min(strs,key=len)
+        min_len = len(min_string)
+        len_strs = len(strs)
+        for i in range (min_len):
+            prefixes = common_prefix(min_string, i, min_len)
+            j = 0
+            while prefixes:
+                if prefixes[-1] in strs[j]:
+                    j +=1
+                else:
+                    prefixes.pop()
+                if j == len_strs:
+                    return prefixes[-1]
+        return ""
+                    
+        
+        
