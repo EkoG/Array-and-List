@@ -1,0 +1,9 @@
+class Solution:
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        static_values = {}
+        for i in range(len(numbers)):
+            second = target - numbers[i]
+            if second in static_values:                               #Tricky part; check if the subsctraction called SECOND is in the 
+                return static_values[second] + 1, i + 1               #Dictionary, so if you are moving from left to right in the List
+            static_values[numbers[i]] = i                             #When you return static_values[second] + 1 will return something you already pass
+        return None                                                   #And the next value  i + 1 will be the second index returned
