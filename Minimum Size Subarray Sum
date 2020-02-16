@@ -1,0 +1,22 @@
+class Solution:
+    def minSubArrayLen(self, s: int, nums: List[int]) -> int:
+        if not nums: return 0
+        l = len(nums)
+        lowest = l + 1
+        count = 0
+        j = 0
+        for i in range(l):
+            count += nums[i]
+            while count >= s:                                             
+                lowest = min(lowest, i - j + 1)
+                count -= nums[j]
+                j += 1   
+        if lowest == l + 1:
+            return 0
+        return lowest
+        
+        '''
+        #The while is used as a condition 'if' if s is reach, the while loop will start taking indexes apart until know minimum sub array
+        The complexity will be o(n log(n)) cause the elements in the array will be just visited maximum twice!
+        '''
+        
