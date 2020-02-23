@@ -1,0 +1,20 @@
+class Solution:
+    def rotate(self, nums: List[int], k: int) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        l = len(nums)
+        if k > l: k = k % l
+        p1 = p2 = i = 0
+        while i < l:
+            if p2 + k >= l:
+                p2 = (p2 + k) % l
+            else:
+                p2 += k
+            if p1 == p2:                                    #If the position 1 and position 2 are the same move into the array to swap again
+                p1 += 1
+                p2 = p1
+            else:
+                nums[p1], nums[p2] = nums[p2], nums[p1]
+            i += 1
+        return
